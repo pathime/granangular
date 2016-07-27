@@ -1,0 +1,12 @@
+<div class="param-control" *ngIf="control.hasSlider">
+    <label><span>{{control.label}}</span></label>
+    <input #range type="range" 
+    [value]="control.value"
+    [id]="control.name" 
+    [min]="control.min" 
+    [max]="control.max" 
+    step="0.01" 
+    (input)="onChange($event, range.value)"
+    (change)="onChange($event, range.value)">
+    
+</div>

@@ -1,0 +1,6 @@
+<div class="transport">
+    <button (click)="start()" [disabled]="disabled || granularService.currentState === state.Recording || granularService.currentState === state.Playing">
+        <img src="images/record.svg"><span>REC</span></button>
+    <button (click)="stop()" [disabled]="disabled || granularService.currentState !== state.Recording">
+        <img src="images/stop.svg"><span>STOP</span></button>
+</div>
