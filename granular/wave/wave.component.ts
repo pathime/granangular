@@ -69,17 +69,16 @@ export class WaveComponent implements OnInit, OnChanges, OnDestroy {
         let requestAnimationFrame = window.requestAnimationFrame || 
                                     window.msRequestAnimationFrame,
             counter = 0,
-            lfoVal: number,
-            self = this;
-        
-        animate();
+            lfoVal: number;
 
-        function animate() {
+        let animate = () => {
             counter += Math.PI / 256;
-            self.lfoVal = Math.abs(Math.cos(counter))
-            self.setControlParam();
+            this.lfoVal = Math.abs(Math.cos(counter))
+            this.setControlParam();
             requestAnimationFrame(animate);
         }
+
+        animate();
     }
     
     ngOnDestroy(): void {
