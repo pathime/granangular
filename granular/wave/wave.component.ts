@@ -16,7 +16,7 @@ export class WaveComponent implements OnInit, OnChanges, OnDestroy {
     public mousedown: boolean = false;
     public lfoVal: number = 0;
     public lfoAmt: number = 0.2;
-    private currentPos: number = 0;
+    private currentPos: number = 0.1;
     private waveSurfer;
 
     constructor(private el: ElementRef) {}
@@ -50,17 +50,17 @@ export class WaveComponent implements OnInit, OnChanges, OnDestroy {
             });
         }
 
+        this.waveSurfer.on('ready', () => this.setControlParam());
     }
     
     public updatePosition(e:MouseEvent, el:HTMLElement, lfo?:boolean): void {
 
         if (!this.mousedown && !lfo) return;
         this.currentPos = e.offsetX / el.offsetWidth;
-        this.modulateWithLFO();
-        
+        this.setControlParam();  
     }
 
-    private modulateWithLFO() {
+    private setControlParam() {
         this.waveSurfer.seekTo(this.currentPos + this.lfoVal * this.lfoAmt);
         this.position.value = this.waveSurfer.getCurrentTime();
     }
@@ -77,7 +77,7 @@ export class WaveComponent implements OnInit, OnChanges, OnDestroy {
         function animate() {
             counter += Math.PI / 256;
             self.lfoVal = Math.abs(Math.cos(counter))
-            self.modulateWithLFO();
+            self.setControlParam();
             requestAnimationFrame(animate);
         }
     }
