@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, OnDestroy, Input, ElementRef } from 'angular2/core';
+import { Component, OnInit, OnChanges, Input, ElementRef } from 'angular2/core';
 import { Control } from '../control/control.component';
 
 declare var WaveSurfer:any
@@ -8,7 +8,7 @@ declare var WaveSurfer:any
     templateUrl: './wave.component.html',
     styleUrls: ['./wave.component.css']
 })
-export class WaveComponent implements OnInit, OnChanges, OnDestroy {
+export class WaveComponent implements OnInit, OnChanges {
 
     @Input() position: Control;
     @Input() sound: string;
@@ -81,7 +81,4 @@ export class WaveComponent implements OnInit, OnChanges, OnDestroy {
         animate();
     }
     
-    ngOnDestroy(): void {
-
-    }
 }

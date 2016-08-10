@@ -1,17 +1,13 @@
 import { Component, Input, OnInit, ChangeDetectorRef } from 'angular2/core';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
 import { COMMON_DIRECTIVES } from 'angular2/common';
+import { GranularService, Transport, State } from './granular.service';
 import { Grain } from './grain/grain.component';
 import { GRAIN_CONTROLS } from './grain/grain.controls';
+import { Control, ControlComponent } from './control/control.component';
+import { Recording, RecordComponent } from './record/record.component';
 import { ReverbComponent } from './reverb/reverb.component';
-import { Control } from './control/control.component';
-import { ControlComponent } from './control/control.component';
-import { GranularService } from './granular.service';
 import { WaveComponent } from './wave/wave.component';
-import { Recording } from './record/record.component';
-import { RecordComponent } from './record/record.component';
-import { Transport } from './granular.service';
-import { State } from './granular.service';
 
 export interface InputNode {
     name: string;

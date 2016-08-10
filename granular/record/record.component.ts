@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from 'angular2/core';
-import { Control } from '../control/control.component';
-import { ControlComponent } from '../control/control.component';
+import { Control, ControlComponent } from '../control/control.component';
 import { GranularService } from '../granular.service';
 import { State } from '../granular.service';
 
