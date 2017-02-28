@@ -1,2 +1,42 @@
-<router-outlet></router-outlet>
-<granular></granular>
+<div class="granular">
+    <div *ngIf="currentState === state.Empty || currentState === state.Recording || currentState === state.Loading" class="record-container">
+        <div *ngIf="currentState === state.Empty && microphoneDisabled" (click)="loadFallback()" class="mic-disabled">
+            MICROPHONE DISABLED.<br />TRY IN FIREFOX, OR CLICK HERE TO LOAD FALLBACK SOUND
+        </div>
+        <div *ngIf="currentState === state.Empty && !microphoneDisabled">NO SOUND FILE LOADED. PRESS RECORD TO BEGIN.</div>
+        <div *ngIf="currentState === state.Loading">LOADING...</div>
+        <div *ngIf="currentState === state.Recording">RECORDING...</div>
+    </div>
+    <wave 
+        [hidden]="currentState === state.Empty || currentState === state.Recording || currentState === state.Loading" 
+        [position]="controls.position" 
+        [sound]="soundUrl">
+    </wave>
+    <div class="transport-container">
+        <record 
+            [currentState]="currentState" 
+            (sendRecording)="recordHandler($event)"
+            (microphoneDisabled)="microphoneDisabled=true"
+            (setState)="setState($event)">
+        </record>
+        <div class="transport">
+            <button (click)="play()" [disabled]="currentState !== state.Paused">
+                <img src="images/play.svg" />
+                <span>PLAY</span>
+            </button>
+            <button (click)="stop()" [disabled]="currentState !== state.Playing">
+                <img src="images/pause.svg" />
+                <span>PAUSE</span>
+            </button>
+        </div>
+    </div>
+    <div class="control-container">
+        <control [control]="controls.length"></control>
+        <control [control]="controls.density"></control>
+        <control [control]="controls.interval"></control>
+        <control [control]="controls.randPosition"></control>
+        <control [control]="controls.randPitch"></control>
+        <control [control]="controls.stereoSpread"></control>
+        <reverb [ctx]="ctx" [outputNodes]="[ctx.destination]" (sendInputNode)="setGrainOutputNode($event)"></reverb>
+    </div>    
+</div>
