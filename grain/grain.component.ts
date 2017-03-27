@@ -58,7 +58,7 @@ export class Grain {
       this.gainNode.gain.linearRampToValueAtTime(gain, this.ctx.currentTime + int + len + fade);
       this.gainNode.gain.linearRampToValueAtTime(0, this.ctx.currentTime + int + len + fade * 2);
     }
-    source.start(this.ctx.currentTime + len, pos, len + fade * 2);
+    source.start(this.ctx.currentTime + int, pos, len + fade * 2);
   }
   
   public stop(): void {
