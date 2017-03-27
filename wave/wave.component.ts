@@ -50,12 +50,11 @@ export class WaveComponent implements OnInit, OnChanges {
 			});
 		}
 
-		this.waveSurfer.on('ready', () => this.setControlParam());
+		this.waveSurfer.on('ready', this.setControlParam);
 	}
 	
-	public updatePosition(e:MouseEvent, el:HTMLElement, lfo?:boolean): void {
-
-		if (!this.mousedown && !lfo) return;
+	public updatePosition(e:MouseEvent, el:HTMLElement): void {
+		if (!this.mousedown) return;
 		this.currentPos = e.offsetX / el.offsetWidth;
 		this.setControlParam();  
 	}
