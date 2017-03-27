@@ -54,7 +54,7 @@ export class RecordComponent implements OnInit {
         let microphone = this.ctx['createMediaStreamSource'](stream);
         this.recorder = new Recorder(microphone);
         this.recorder.record();
-        this.timeOut = setTimeout(() => this.stop(), 5000);
+        this.timeOut = setTimeout(this.stop, 5000);
       }, error => this.setDisabled());
     } else {
       this.recorder = new Recorder(this.inputNode);
@@ -68,7 +68,7 @@ export class RecordComponent implements OnInit {
     this.recorder.stop();
 
     this.recorder.getBuffer(buffers => {
-      let buffer = this.ctx.createBuffer( 2, buffers[0].length, this.ctx.sampleRate );
+      let buffer = this.ctx.createBuffer(2, buffers[0].length, this.ctx.sampleRate);
       buffer.getChannelData(0).set(buffers[0]);
       buffer.getChannelData(1).set(buffers[1]);
 
@@ -79,7 +79,7 @@ export class RecordComponent implements OnInit {
           url,
           buffer
         });
-    });
+      });
     });
   }
 }
